@@ -38,8 +38,8 @@ public class CartDaoMem implements CartDao {
         price = price.subtract(product.getDefaultPrice().multiply(new BigDecimal(cart.get(product))));
         if (cart.containsKey(product)) {
             {
+                itemCount=itemCount-cart.get(product);
                 cart.remove(product);
-                itemCount--;
             }
         }
 

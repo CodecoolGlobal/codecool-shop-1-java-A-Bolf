@@ -83,7 +83,7 @@
     height: 2%;
     width: 2%;
     position: relative;
-    left: 82%;
+    left: 80%;
 
 }
 .total{
@@ -97,4 +97,9 @@
     width: 20px;
     text-align: center;
     padding: unset;
+}
+#header-item-count{
+    position: relative;
+    left: 80%;
+    font-size: 25px;
 }
