@@ -1,7 +1,9 @@
 package com.codecool.shop.controller;
 
 import com.codecool.shop.config.TemplateEngineUtil;
+import com.codecool.shop.dao.implementation.OrderDao;
 import com.codecool.shop.model.Customer;
+import com.codecool.shop.model.Order;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
@@ -23,13 +25,34 @@ import java.io.IOException;
             engine.process("/product/checkout.html", context, resp.getWriter());
         }
 
+        @Override
+        protected void doPost(HttpServletRequest request, HttpServletResponse response)
+                throws ServletException, IOException {
+
+            OrderDao orderDao = OrderDao.getInstance();
+
+            String name = request.getParameter("name");
+            String email = request.getParameter("email");
+            String phone = request.getParameter("phone");
+            String address = request.getParameter("address");
+            String country = request.getParameter("country");
+            String city = request.getParameter("city");
+            String zip = request.getParameter("zip-code");
+
+            Customer customer = new Customer(name, phone, email, address, country, city, zip);
+            Order order = new Order(customer);
+            orderDao.setOrder(order);
+            System.out.println(order);
+            response.sendRedirect(request.getContextPath() + "/payment");
+        }
+
 
     private void saveCustomerOrder() {
-        //TODO
+
     }
 
     private void saveAddressToOrder() {
-        //TODO
+
     }
 
 
