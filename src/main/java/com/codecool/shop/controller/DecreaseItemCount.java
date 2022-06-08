@@ -16,14 +16,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(urlPatterns = {"/api/cart/remove"})
-public class RemoveFromCart extends HttpServlet {
+@WebServlet(urlPatterns = {"/api/cart/decrease"})
+public class DecreaseItemCount extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if (req.getParameter("id") != null) {
             int id = Integer.parseInt(req.getParameter("id"));
             CartDao cart = CartDaoMem.getInstance();
-            cart.remove(id);
+            cart.decreaseCount(id);
             resp.setStatus(200);
             System.out.println(cart.getAll());
         }
