@@ -5,7 +5,7 @@
     <meta name="author" content="Codecool"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 
-    <title>Codecool Shop</title>
+    <title>Silk Road</title>
 
     <!-- Bootstrap components -->
     <script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
@@ -35,9 +35,6 @@
 
 <body>
 <div th:replace="header.html :: copy"></div>
-<div class="jumbotron text-center">
-    <h1>Welcome to Codecool's Shop</h1>
-</div>
 <div class='topnav'>
     <a class='active'  id="mainPage" href="/">Silk Road Products</a>
     <a  id="category" href="/index?type=category">Product Categories</a>
@@ -60,7 +57,7 @@
                 </div>
                 <div class="card-body">
                     <div class="card-text">
-                        <p class="lead" th:text="${prod.getPrice()}">100 USD</p>
+                        <p class="price" th:text="${prod.getPrice()}">100 USD</p>
                     </div>
                     <div class="card-text">
                         <button class="btn btn-success add-to-cart" th:data-product_id="${prod.id}">Add to cart</button>
