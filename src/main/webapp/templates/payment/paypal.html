@@ -34,42 +34,26 @@
 <body>
 <div th:replace="header.html :: copy"></div>
 <div class="text-left">
-    <h1 id="item-count" th:text="${itemCount}+' Items in cart:'"></h1>
 </div>
 
 <div class="container">
-    <div id="products" class="row">
-        <div class="col col-sm-6 col-md-3 col-lg-2" th:each="prod : ${productMap}">
-            <div class="card">
-                <button class="btn btn-success delete-btn" th:data-product_id="${prod.key.id}" style="float: right">X
-                </button>
-                <img class="" src="http://placehold.it/400x250/000/fff"
-                     th:attr="src='./static/img/product_' + ${prod.key.id} + '.jpg'" alt=""/>
-                <div class="card-header">
-                    <h4 class="card-title" th:text="${prod.value}"></h4>
-                    <h4 class="card-title" th:text="${prod.key.name}">Product name</h4>
-                </div>
-                <div class="card-body">
-                    <div class="card-text">
-                        <p class="lead price" th:data-count="${prod.value}" th:data-price="${prod.key.getPrice()}"
-                           th:text="${prod.key.getPrice()}+'/pcs'">100 USD</p>
-                    </div>
-                    <div class="card-text">
-                    </div>
-                </div>
-            </div>
+    <h5 class="card-title">Paypal Payment</h5>
+    <form action="/order-confirmation" method="post">
+        <div class="form-group">
+            <label for="email">Email address</label>
+            <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email">
+            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
         </div>
-    </div>
-    <div class="total">Total: <span th:text="${total}+'$'">0 USD</span></div>
-    <div class="text-left">
-        <a class="btn btn-success" href="/">Continue shopping</a>
-        <a class="btn btn-success" href="/product/checkout">Checkout</a>
-        <a class="btn btn-success" href="/payment?paytype=paypal">paypal</a>
-        <a class="btn btn-success" href="/payment?paytype=creditcard">creditcard</a>
-
-    </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" placeholder="Password">
+        </div>
+        <div class="text">
+            Total price: <span th:text="${totalPrice}"></span> $
+        </div>
+        <button type="submit" class="btn btn-primary">Pay</button>
+    </form>
 </div>
-
 <div th:replace="footer.html :: copy"></div>
 
 </body>
