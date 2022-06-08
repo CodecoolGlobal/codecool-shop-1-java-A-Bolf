@@ -19,6 +19,7 @@ public class PaymentController extends HttpServlet {
         WebContext context = new WebContext(req, resp, req.getServletContext());
         CartDao cartDao = CartDaoMem.getInstance();
         context.setVariable("totalPrice", cartDao.getTotalPrice());
+        context.setVariable("itemCount", cartDao.getItemCount());
         if (payType.equals("paypal")) {
             engine.process("payment/paypal.html", context, resp.getWriter());
         }

@@ -4,11 +4,13 @@ import com.codecool.shop.config.TemplateEngineUtil;
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.SupplierDao;
+import com.codecool.shop.dao.implementation.CartDaoMem;
 import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.dao.implementation.SupplierDaoMem;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.Supplier;
+import com.codecool.shop.service.CartService;
 import com.codecool.shop.service.ProductService;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
@@ -24,31 +26,32 @@ import java.util.List;
 import java.util.Objects;
 
 
-    @WebServlet(urlPatterns = "/index")
-    public class IndexController extends HttpServlet {
+@WebServlet(urlPatterns = "/index")
+public class IndexController extends HttpServlet {
 
-        @Override
-        protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-            String requestPage = request.getParameter("type");
-            TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(request.getServletContext());
-            WebContext context = new WebContext(request, response, request.getServletContext());
-            ProductDao productDataStore = ProductDaoMem.getInstance();
-            ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
-            SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
-            ProductService productService = new ProductService(productDataStore,productCategoryDataStore,supplierDataStore);
-            context.setVariable("data", productService.getAllProduct());
-            List<Product> productList = productService.getAllProduct();
-            if(requestPage.equals("category")){
-                String title = "Products by Product Categories";
-                context.setVariable("title", title);
-            }else{
-                String title = "Products by Suppliers";
-                context.setVariable("title", title);
-            }
-            engine.process("product/indexPage.html", context, response.getWriter());
-
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String requestPage = request.getParameter("type");
+        TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(request.getServletContext());
+        WebContext context = new WebContext(request, response, request.getServletContext());
+        ProductDao productDataStore = ProductDaoMem.getInstance();
+        ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
+        SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
+        ProductService productService = new ProductService(productDataStore, productCategoryDataStore, supplierDataStore);
+        context.setVariable("data", productService.getAllProduct());
+        List<Product> productList = productService.getAllProduct();
+        context.setVariable("itemCount", CartDaoMem.getInstance().getItemCount());
+        if (requestPage.equals("category")) {
+            String title = "Products by Product Categories";
+            context.setVariable("title", title);
+        } else {
+            String title = "Products by Suppliers";
+            context.setVariable("title", title);
         }
+        engine.process("product/indexPage.html", context, response.getWriter());
+
     }
+}
 
 
 
