@@ -2,12 +2,11 @@ package com.codecool.shop.controller;
 
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
+import com.codecool.shop.dao.implementation.CartDao;
 import com.codecool.shop.dao.implementation.CartDaoMem;
-import com.codecool.shop.dao.SupplierDao;
 import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.service.CartService;
-import com.codecool.shop.dao.implementation.SupplierDaoMem;
 import com.codecool.shop.service.ProductService;
 import com.codecool.shop.config.TemplateEngineUtil;
 import org.thymeleaf.TemplateEngine;
@@ -22,27 +21,21 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-@WebServlet(urlPatterns = {"/"})
-public class ProductController extends HttpServlet {
+@WebServlet(urlPatterns = {"/cart"})
+public class CartController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        ProductDao productDataStore = ProductDaoMem.getInstance();
+        CartDao cartDataStore = CartDaoMem.getInstance();
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
-        SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
-        ProductService productService = new ProductService(productDataStore,productCategoryDataStore,supplierDataStore);
-        ProductService productService = new ProductService(productDataStore, productCategoryDataStore);
-        CartDaoMem cartDataStore = CartDaoMem.getInstance();
         CartService cartService = new CartService(cartDataStore, productCategoryDataStore);
 
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
-        context.setVariable("category", productService.getProductCategory(1));
-        context.setVariable("products", productService.getProductsForCategory(1));
+        context.setVariable("productMap", cartService.getCartContent());
+        context.setVariable("total", cartService.getTotalPrice());
         context.setVariable("itemCount", cartService.getItemCount());
-        engine.process("product/index.html", context, resp.getWriter());
-        System.out.println(CartDaoMem.getInstance().getAll());
-
+        engine.process("product/cart.html", context, resp.getWriter());
     }
 
 }
