@@ -54,7 +54,14 @@
                         <p class="lead price" th:data-count="${prod.value}" th:data-price="${prod.key.getPrice()}"
                            th:text="${prod.key.getPrice()}+'/pcs'">100 USD</p>
                     </div>
-                    <div class="card-text">
+                    <div class="card-text item-count-container">
+                        <button class="btn btn-success decrease-count-btn" th:data-product_id="${prod.key.id}">-
+                        </button>
+                        <input class="item-count-input" type="text" th:data-product_id="${prod.key.id}"
+                               th:value="${prod.value}">
+                        <button class="btn btn-success increase-count-btn" th:data-product_id="${prod.key.id}">+
+                        </button>
+
                     </div>
                 </div>
             </div>
@@ -68,6 +75,5 @@
 </div>
 
 <div th:replace="footer.html :: copy"></div>
-
 </body>
 </html>
