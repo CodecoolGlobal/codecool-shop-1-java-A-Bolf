@@ -39,8 +39,7 @@
 
 <body>
 <div th:replace="header.html :: copy"></div>
-<div class="jumbotron text-center">
-    <span th:if="${error}" th:text="${error}"></span>
+<div class="jumbotron text-center" th:if="${error}" th:text="${error}">
 </div>
 
 <span th:unless="${error}">
@@ -70,6 +69,7 @@
 
 </div>
     </div>
+    <div class="total">Total: <span th:text="${total}+'$'">0 USD</span></div>
     </span>
 
 <div th:replace="footer.html :: copy"></div>
