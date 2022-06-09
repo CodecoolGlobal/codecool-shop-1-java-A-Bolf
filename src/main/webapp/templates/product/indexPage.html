@@ -13,6 +13,7 @@
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"
             integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 
+    <script src="/static/js/indexPage.js" defer></script>
     <!--Latest compiled and minified Popper -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
             integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
@@ -54,13 +55,13 @@
                     <ul th:case="'Products by Product Categories'">
                         <li class="indexHolder" th:each="dat: ${data}">
                             <span class="productIndex" th:text="${dat.name}">Product name</span>
-                            <a class="searchType plussPointer" th:text="${dat.productCategory.name}">Product description</a>
+                            <a class="searchType plussPointer" th:text="${dat.productCategory.name}"th:data-id="${dat.productCategory.id}" data-index="cat">Product description</a>
                         </li>
                     </ul>
                     <ul th:case="'Products by Suppliers'">
                             <li class="indexHolder" th:each="dat: ${data}">
                                 <span class="productIndex" th:text="${dat.name}">Product name</span>
-                                <a  class="searchType plussPointer" th:text="${dat.supplier.name}"></a>
+                                <a  class="searchType plussPointer" th:text="${dat.supplier.name}" th:data-id="${dat.supplier.id}" data-index="sup"></a>
                             </li>
                     </ul>
                 </div>
