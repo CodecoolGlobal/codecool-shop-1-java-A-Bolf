@@ -50,16 +50,17 @@
 <!--            <p>Your order number is: <?= $orderId ?></p>-->
             <p>You will receive an email when your order has shipped.</p>
         </div>
-    </div>
+
 
 
     <div id="products" class="row" th:each="product : ${productMap}">
         <div class="col col-lg-1 col-lg-2 col-md-auto col-lg-2">
+
             <div class="col col-lg-1" th:text="${productMap.get(product)}"> </div>
-        <img src="" width="32" height="32" th:attr="src=${product.getImgLink()}">
-<!--        <div class="" src="http://placehold.it/400x250/000/fff"-->
-<!--             th:attr="src='/static/img/product_' + ${product.key.id} + '.jpg'" alt=""/>-->
+        <img class="" src="http://placehold.it/400x250/000/fff" width="50" height="50"
+             th:attr="src='/static/img/product_' + ${product.key.id} + '.jpg'" alt=""/>
         <div class="col-md-auto" th:text="${product.key.name}"> </div>
+            <div class="col-lg-1" th:text="${product.value}"></div>
         <div class="col col-lg-2" th:text="${product.key.getPrice()}"> </div>
 <!--            <div class="card">-->
 <!--                <img class="" src="http://placehold.it/400x250/000/fff"-->
@@ -81,6 +82,8 @@
     </div>
 
 </div>
+    </div>
+    </span>
 
 <div th:replace="footer.html :: copy"></div>
 
