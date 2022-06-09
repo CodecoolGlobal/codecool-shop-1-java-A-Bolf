@@ -39,12 +39,12 @@ public class CheckoutController extends HttpServlet {
         String city = request.getParameter("city");
         String zip = request.getParameter("zip-code");
 
-        Customer customer = new Customer(name, phone, email, address, country, city, zip);
-        Order order = new Order(customer);
-        orderDao.setOrder(order);
-        System.out.println(order);
-        response.sendRedirect(request.getContextPath() + "/payment?paytype=paypal");
-    }
+            Customer customer = new Customer(name, phone, email, address, country, city, zip);
+            Order order = new Order(customer);
+            orderDao.setOrder(order);
+            System.out.println(order);
+            response.sendRedirect(request.getContextPath() + "/payment?paytype=" + request.getParameter("paytype"));
+        }
 
 
     private void saveCustomerOrder() {
