@@ -9,7 +9,11 @@ import java.util.List;
 public interface CartDao {
     void add(Product product);
 
+    void updateCount(int id, int count);
+
     void remove(int id);
+
+    void decreaseCount(int id);
 
     Product getProductByid(int id);
 

@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <link rel="icon" type="image/png" href="/static/img/favicon.png" />
     <meta charset="utf-8"/>
     <meta name="author" content="Codecool"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
@@ -34,10 +35,11 @@
 <body>
 <div th:replace="header.html :: copy"></div>
 <div class="text-left">
-    <h1 id="item-count" th:text="${itemCount}+' Items in cart:'"></h1>
+
 </div>
 
 <div class="container">
+    <h1 id="item-count" th:text="${itemCount}+' Items in cart:'"></h1>
     <div id="products" class="row">
         <div class="col col-sm-6 col-md-3 col-lg-2" th:each="prod : ${productMap}">
             <div class="card">
@@ -46,7 +48,6 @@
                 <img class="" src="http://placehold.it/400x250/000/fff"
                      th:attr="src='./static/img/product_' + ${prod.key.id} + '.jpg'" alt=""/>
                 <div class="card-header">
-                    <h4 class="card-title" th:text="${prod.value}"></h4>
                     <h4 class="card-title" th:text="${prod.key.name}">Product name</h4>
                 </div>
                 <div class="card-body">
@@ -54,7 +55,14 @@
                         <p class="lead price" th:data-count="${prod.value}" th:data-price="${prod.key.getPrice()}"
                            th:text="${prod.key.getPrice()}+'/pcs'">100 USD</p>
                     </div>
-                    <div class="card-text">
+                    <div class="card-text item-count-container">
+                        <button class="btn btn-success decrease-count-btn" th:data-product_id="${prod.key.id}">-
+                        </button>
+                        <input class="item-count-input" type="text" th:data-product_id="${prod.key.id}"
+                               th:value="${prod.value}">
+                        <button class="btn btn-success increase-count-btn" th:data-product_id="${prod.key.id}">+
+                        </button>
+
                     </div>
                 </div>
             </div>
@@ -64,10 +72,12 @@
     <div class="text-left">
         <a class="btn btn-success" href="/">Continue shopping</a>
         <a class="btn btn-success" href="/product/checkout">Checkout</a>
+        <a class="btn btn-success" href="/payment?paytype=paypal">paypal</a>
+        <a class="btn btn-success" href="/payment?paytype=creditcard">creditcard</a>
+
     </div>
 </div>
 
 <div th:replace="footer.html :: copy"></div>
-
 </body>
 </html>
