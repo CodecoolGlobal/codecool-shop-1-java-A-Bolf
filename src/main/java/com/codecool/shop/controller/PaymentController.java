@@ -40,6 +40,6 @@ public class PaymentController extends HttpServlet {
             resp.setContentType("application/json");
             resp.getWriter().write("{\"status\": \"fail\"}");
         }
-        resp.sendRedirect("product/order-confirmation");
+        resp.sendRedirect("/order-confirmation");
     }
 }
