@@ -34,6 +34,7 @@ public class Initializer implements ServletContextListener {
 
         //setting up a new product category
         ProductCategory tablet = new ProductCategory("Tablet", "Hardware", "A tablet computer, commonly shortened to tablet, is a thin, flat mobile computer with a touchscreen display.");
+        ProductCategory nft = new ProductCategory("NFT", "NFT Picture", "Unique picture, which u can say only u have truely");
         productCategoryDataStore.add(tablet);
 
         //setting up products and printing it
@@ -49,5 +50,15 @@ public class Initializer implements ServletContextListener {
         Product fairyDust = new Product("\"Fairy Dust\"", new BigDecimal("500"), "USD", "Magic white powder", tablet, amazon);
         productDataStore.add(fairyDust);
         cartDataStore.add(fairyDust);
+        Product silkNFT = new Product("Silk", new BigDecimal("30100"), "USD", "Silk looking material", nft, amazon);
+        productDataStore.add(silkNFT);
+        Product roadNft = new Product("Road", new BigDecimal("32200"), "USD", "A long road", nft, amazon);
+        productDataStore.add(roadNft);
+        Product cellingDogNFT = new Product("Celling Dog", new BigDecimal("40000"), "USD", "A dog on the celling", nft, amazon);
+        productDataStore.add(cellingDogNFT);
+        Product shrekNFT = new Product("Shrek", new BigDecimal("35500"), "USD", "Made in China", nft, amazon);
+        productDataStore.add(shrekNFT);
+        Product duckTankNFT = new Product("Duck Tank", new BigDecimal("20100"), "USD", "A tank of ducks", nft, amazon);
+        productDataStore.add(duckTankNFT);
     }
 }
