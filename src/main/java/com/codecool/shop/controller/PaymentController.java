@@ -14,19 +14,26 @@ import java.util.Date;
 public class PaymentController extends HttpServlet {
     @Override
     protected void doGet(javax.servlet.http.HttpServletRequest req, javax.servlet.http.HttpServletResponse resp) throws javax.servlet.ServletException, java.io.IOException {
-        String payType = req.getParameter("paytype");
+
+
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
         CartDao cartDao = CartDaoMem.getInstance();
         context.setVariable("totalPrice", cartDao.getTotalPrice());
-        if (payType.equals("paypal")) {
-            engine.process("payment/paypal.html", context, resp.getWriter());
-        }
-        else if (payType.equals("creditcard")) {
-            engine.process("payment/creditcard.html", context, resp.getWriter());
-        }
-        else {
-            resp.sendError(418, "I'm a teapot");
+        String payType = "paypal";
+        if (req.getParameter("paytype") == null) {
+            context.setVariable("error", "I'm a teapot");
+            engine.process("product/order_confirmation.html", context, resp.getWriter());
+        } else {
+//            String payType = req.getParameter("paytype");
+            if (payType.equals("paypal")) {
+                engine.process("payment/paypal.html", context, resp.getWriter());
+            } else if (payType.equals("creditcard")) {
+                engine.process("payment/creditcard.html", context, resp.getWriter());
+            } else {
+                context.setVariable("error", "I'm a teapot");
+                engine.process("product/order_confirmation.html", context, resp.getWriter());
+            }
         }
     }
 
@@ -39,6 +46,6 @@ public class PaymentController extends HttpServlet {
             resp.setContentType("application/json");
             resp.getWriter().write("{\"status\": \"fail\"}");
         }
-        resp.sendRedirect("/order-confirmation");
+        resp.sendRedirect("product/order-confirmation");
     }
 }

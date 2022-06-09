@@ -15,36 +15,36 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 
-    @WebServlet(urlPatterns={"/product/checkout"})
-    public class CheckoutController extends HttpServlet {
+@WebServlet(urlPatterns = {"/product/checkout"})
+public class CheckoutController extends HttpServlet {
 
-        @Override
-        protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-            TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
-            WebContext context = new WebContext(req, resp, req.getServletContext());
-            engine.process("/product/checkout.html", context, resp.getWriter());
-        }
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
+        WebContext context = new WebContext(req, resp, req.getServletContext());
+        engine.process("/product/checkout.html", context, resp.getWriter());
+    }
 
-        @Override
-        protected void doPost(HttpServletRequest request, HttpServletResponse response)
-                throws ServletException, IOException {
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
 
-            OrderDao orderDao = OrderDao.getInstance();
+        OrderDao orderDao = OrderDao.getInstance();
 
-            String name = request.getParameter("name");
-            String email = request.getParameter("email");
-            String phone = request.getParameter("phone");
-            String address = request.getParameter("address");
-            String country = request.getParameter("country");
-            String city = request.getParameter("city");
-            String zip = request.getParameter("zip-code");
+        String name = request.getParameter("name");
+        String email = request.getParameter("email");
+        String phone = request.getParameter("phone");
+        String address = request.getParameter("address");
+        String country = request.getParameter("country");
+        String city = request.getParameter("city");
+        String zip = request.getParameter("zip-code");
 
-            Customer customer = new Customer(name, phone, email, address, country, city, zip);
-            Order order = new Order(customer);
-            orderDao.setOrder(order);
-            System.out.println(order);
-            response.sendRedirect(request.getContextPath() + "/payment");
-        }
+        Customer customer = new Customer(name, phone, email, address, country, city, zip);
+        Order order = new Order(customer);
+        orderDao.setOrder(order);
+        System.out.println(order);
+        response.sendRedirect(request.getContextPath() + "/payment?paytype=paypal");
+    }
 
 
     private void saveCustomerOrder() {

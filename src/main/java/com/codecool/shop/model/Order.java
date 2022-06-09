@@ -9,8 +9,8 @@ import java.util.Map;
 
 public class Order {
 
-    public CartDao cart = CartDaoMem.getInstance();
-    public HashMap<Product, Integer> order = cart.getAll();
+    public CartDao cartdao = CartDaoMem.getInstance();
+    public HashMap<Product, Integer> cart = cartdao.getAll();
     public Customer customer;
 
     public Order(Customer customer) {
