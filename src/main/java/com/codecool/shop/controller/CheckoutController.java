@@ -43,7 +43,7 @@ import java.io.IOException;
             Order order = new Order(customer);
             orderDao.setOrder(order);
             System.out.println(order);
-            response.sendRedirect(request.getContextPath() + "/payment");
+            response.sendRedirect(request.getContextPath() + "/payment?paytype=" + request.getParameter("paytype"));
         }
 
 
