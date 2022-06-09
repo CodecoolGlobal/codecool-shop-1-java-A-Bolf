@@ -36,6 +36,7 @@ public class Initializer implements ServletContextListener {
         ProductCategory tablet = new ProductCategory("Tablet", "Hardware", "A tablet computer, commonly shortened to tablet, is a thin, flat mobile computer with a touchscreen display.");
         ProductCategory nft = new ProductCategory("NFT", "NFT Picture", "Unique picture, which u can say only u have truely");
         productCategoryDataStore.add(tablet);
+        productCategoryDataStore.add(nft);
 
         //setting up products and printing it
         Product iphone = new Product("Iphone", new BigDecimal("500"), "USD", "A phone from Apple", tablet, amazon);
