@@ -45,7 +45,7 @@
 <div class="container">
     <div th:switch="${searchType}" class="card">
         <strong th:case="'Original'" th:text="${category.name}">Category Title</strong>
-        <strong th:case="'Indexing'" th:text="${category}">Category Title</strong>
+        <strong th:case="'Indexing'" th:text="${head}">Category Title</strong>
     </div>
 
     <div id="products" class="row">

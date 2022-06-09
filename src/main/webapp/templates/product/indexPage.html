@@ -9,11 +9,16 @@
     <title th:text="${title}">Silk Road</title>
 
     <!-- Bootstrap components -->
+    <script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
     <!-- Latest compiled and minified Jquery -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"
             integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 
+
+    <script src="/static/js/cart.js" defer></script>
     <script src="/static/js/indexPage.js" defer></script>
+
+
     <!--Latest compiled and minified Popper -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
             integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
@@ -27,14 +32,11 @@
           integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <!-- End of Bootstrap components -->
 
-    <link rel="stylesheet" type="text/css" href="/static/css/custom.css" />
+    <link rel="stylesheet" type="text/css" href="/static/css/custom.css"/>
 </head>
 
 <body>
-
-<div class="jumbotron text-center">
-    <h1>Silk Road</h1>
-</div>
+<div th:replace="header.html :: copy"></div>
 <div th:switch="${title}">
     <div th:case="'Products by Product Categories'" class='topnav'>
         <a  id="mainPage1" href="/">Silk Road Products</a>
